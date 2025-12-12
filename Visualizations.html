@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Grafici Vega</title>
+
+    <!-- Importa Vega e Vega-Embed -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body>
+    <!-- Contenitori per i grafici -->
+
+
+    <h2>Parole più frequenti negli anni, divise per classi di Nizza</h2>
+    <h3>Spostare il cursore per muoversi lungo le classi di Nizza e andare sopra il
+    grafico per osservare le parole più frequenti</h3>
+    <p>Un insight interessante emerge osservando la classe di Nizza 30 (generi alimentari):
+        nel lustro 2020-2024 la parola più frequente è “italiano”,
+        un dato che coincide in modo significativo con il periodo dell’esplosione del Covid.</p>
+    <p>Un altro dato interessante si trova andando alla classe di Nizza 5 (generi farmaceutici),
+    dal 2020, fra le parole più usate appare anche "ciclo", segno di una società
+    che sta iniziando a sdoganare molte parole tabù.</p>
+    <div id="vis-second" style="width: 100%;"></div>
+
+    <h2>Anglicismi negli anni, divisi per classi di Nizza</h2>
+    <div id="vis-length"></div>
+
+    <script>
+        // Funzione per caricare e renderizzare un grafico
+        function renderChart(divId, jsonFile) {
+            fetch(jsonFile)
+                .then(response => response.json())
+                .then(spec => vegaEmbed(divId, spec))
+                .catch(console.error);
+        }
+
+        // Carica i grafici
+        renderChart('#vis-second', 'chart_topic.json');
+        renderChart('#vis-length', 'chart_angl_word.json'); //
+    </script>
+</body>
+</html>
